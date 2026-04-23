@@ -1,4 +1,5 @@
 import json
+import math
 import os
 import re
 from contextlib import asynccontextmanager
@@ -450,6 +451,7 @@ async def search_profiles(
             "page": page,
             "limit": limit,
             "total": total,
+            "total_pages": math.ceil(total / limit) if total > 0 else 0,
             "data": [fmt_profile(r) for r in rows],
         },
         headers=CORS_HEADERS,
@@ -529,6 +531,7 @@ async def list_profiles(
             "page": page,
             "limit": limit,
             "total": total,
+            "total_pages": math.ceil(total / limit) if total > 0 else 0,
             "data": [fmt_profile(r) for r in rows],
         },
         headers=CORS_HEADERS,
